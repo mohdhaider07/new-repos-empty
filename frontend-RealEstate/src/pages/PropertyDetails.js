@@ -165,35 +165,29 @@ const PropertyDetails = () => {
 									</div>
 									<div label="Legal Documents">
 										{property && (
-											<Link
-												className=""
-												target="_blank"
-												to={property.legalDocument}
-											>
-												<a>Legal Documents pdf </a>
-											</Link>
+											<iframe
+												src={`http://docs.google.com/gview?embedded=true&url=${property.legalDocument}`}
+												width="400px"
+												height="300px"
+											/>
 										)}
 									</div>
 									<div label="Cost Sheet  ">
 										{property && (
-											<Link
-												className=""
-												target="_blank"
-												to={property.costSheet}
-											>
-												<a>Cost Sheet pdf </a>
-											</Link>
+											<iframe
+												src={`http://docs.google.com/gview?embedded=true&url=${property.costSheet}`}
+												width="400px"
+												height="300px"
+											/>
 										)}
 									</div>
 									<div label="Payment Plan  ">
 										{property && (
-											<Link
-												className=""
-												target="_blank"
-												to={property.paymentPlan}
-											>
-												<a>Payment Plan pdf </a>
-											</Link>
+											<iframe
+												src={`http://docs.google.com/gview?embedded=true&url=${property.paymentPlan}`}
+												width="400px"
+												height="300px"
+											/>
 										)}
 									</div>
 									<div label="Gallery">

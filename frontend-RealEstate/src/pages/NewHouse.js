@@ -95,7 +95,7 @@ const NewHouse = () => {
 				console.log("Upload is " + progress + "% done");
 				switch (snapshot.state) {
 					case "paused":
-						console.log("Upload is paused");
+						alert("Upload is paused");
 						break;
 					case "running":
 						console.log("Upload is running");
@@ -116,9 +116,7 @@ const NewHouse = () => {
 					// ...
 
 					case "storage/unknown":
-						console.log(
-							"Unknown error occurred, inspect error.serverResponse"
-						);
+						alert("Unknown error occurred, inspect error.serverResponse");
 						// Unknown error occurred, inspect error.serverResponse
 						break;
 				}
@@ -425,26 +423,24 @@ const NewHouse = () => {
 						placeholder="Image LG"
 					/>
 					{legalDocument && (
-						<div className="relative flex  w-fit">
+						<div className=" flex flex-col   w-fit">
 							{/* <img
 								className="h-20  object-cover"
 								src=" https://firebasestorage.googleapis.com/v0/b/real-state-24b54.appspot.com/o/1660417630517Haider's%20Resume.pdf?alt=media&token=2d022518-3014-4ffb-8dd8-9a5e0480da8d"
 								alt="img"
 							/> */}
-							<Link
-								className="px-4 border"
-								target="_blank"
-								to={legalDocument}
-							>
-								<a>Legal Document Pdf </a>
-							</Link>
+							<iframe
+								src={`http://docs.google.com/gview?embedded=true&url=${legalDocument}`}
+								width="300px"
+								height="200px"
+							/>
 							<span
 								onClick={() =>
 									handleDelete(legalDocument, setLegalDocument)
 								}
-								className="absolute cursor-pointer  flex top-0 right-0 rounded-full   "
+								className=" cursor-pointer  flex p-2 mt-2 text-center w-fit text-white rounded-md bg-red-600 hover:bg-red-800   "
 							>
-								X
+								Delete
 							</span>
 						</div>
 					)}
@@ -463,19 +459,17 @@ const NewHouse = () => {
 						placeholder="Image LG"
 					/>
 					{costSheet && (
-						<div className="relative flex  w-fit">
-							<Link
-								className="px-4 border"
-								target="_blank"
-								to={costSheet}
-							>
-								<a>Cost Sheet Pdf </a>
-							</Link>
+						<div className="relative flex  flex-col w-fit">
+							<iframe
+								src={`http://docs.google.com/gview?embedded=true&url=${costSheet}`}
+								width="300px"
+								height="200px"
+							/>
 							<span
 								onClick={() => handleDelete(costSheet, setCostSheet)}
-								className="absolute cursor-pointer  flex top-0 right-0 rounded-full   "
+								className=" cursor-pointer  flex p-2 mt-2 text-center w-fit text-white rounded-md bg-red-600 hover:bg-red-800   "
 							>
-								X
+								Delete
 							</span>
 						</div>
 					)}
@@ -493,21 +487,19 @@ const NewHouse = () => {
 						placeholder="Image LG"
 					/>
 					{paymentPlan && (
-						<div className="relative flex  w-fit">
-							<Link
-								className="px-4 border"
-								target="_blank"
-								to={paymentPlan}
-							>
-								<a>Payment Plan Pdf </a>
-							</Link>
+						<div className="relative flex flex-col  w-fit">
+							<iframe
+								src={`http://docs.google.com/gview?embedded=true&url=${paymentPlan}`}
+								width="300px"
+								height="200px"
+							/>
 							<span
 								onClick={() =>
 									handleDelete(paymentPlan, setPaymentPlan)
 								}
-								className="absolute cursor-pointer  flex top-0 right-0 rounded-full   "
+								className=" cursor-pointer  flex p-2 mt-2 text-center w-fit text-white rounded-md bg-red-600 hover:bg-red-800   "
 							>
-								X
+								Delete
 							</span>
 						</div>
 					)}
