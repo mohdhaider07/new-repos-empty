@@ -26,7 +26,13 @@ const Header = () => {
 						className="bg-red-500 hover:bg-red-800 text-white px-4 py-3 rounded-lg transition"
 						to="/newhouse"
 					>
-						Create New
+						Create Property
+					</Link>
+					<Link
+						className="bg-red-500 hover:bg-red-800 text-white px-4 py-3 rounded-lg transition"
+						to="/newcategory"
+					>
+						Create Category
 					</Link>
 				</div>
 			</div>

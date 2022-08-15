@@ -6,6 +6,7 @@ import Header from "./components/Header";
 
 // import pages
 import Home from "./pages/Home";
+import NewCategory from "./pages/NewCategory";
 import NewHouse from "./pages/NewHouse";
 import PropertyDetails from "./pages/PropertyDetails";
 
@@ -16,7 +17,8 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/property/:id" element={<PropertyDetails />} />
-				<Route path="/newHouse" element={<NewHouse />} />
+				<Route path="/newhouse" element={<NewHouse />} />
+				<Route path="/newcategory" element={<NewCategory />} />
 			</Routes>
 			<Footer />
 		</div>

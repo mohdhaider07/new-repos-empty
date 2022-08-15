@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 
-import axios from "axios";
+import { publicRequest } from "../requestMethods";
 // import data
 import { housesData } from "../data";
 
@@ -22,9 +22,7 @@ const HouseContextProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchHouses = async () => {
 			try {
-				const { data } = await axios.get(
-					"http://localhost:5000/api/house/"
-				);
+				const { data } = await publicRequest.get("/house/");
 				// console.log(data);
 				setHouses(data);
 				setHouseData(data);

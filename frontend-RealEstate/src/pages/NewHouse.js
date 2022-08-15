@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { publicRequest } from "../requestMethods";
 import { Link } from "react-router-dom";
 // firebase
 import {
@@ -31,11 +31,11 @@ const NewHouse = () => {
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(image);
-		console.log(imageLg);
+		// console.log(image);
+		// console.log(imageLg);
 		setIsLoading(true);
 		try {
-			const { data } = await axios.post("http://localhost:5000/api/house/", {
+			const { data } = await publicRequest.post("/house/", {
 				...inputs,
 				image,
 				imageLg,
