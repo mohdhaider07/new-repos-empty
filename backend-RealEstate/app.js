@@ -3,14 +3,20 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const houseRoute = require("./routes/house");
 const categoryRoute = require("./routes/category");
-
 const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
 dotenv.config();
-app.use(cors());
+//CORS
+app.use(
+	cors({
+		origin: "*",
+		methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+	})
+);
+
 //DB
 mongoose
 	.connect(process.env.DB_KEY)

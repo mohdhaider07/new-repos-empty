@@ -18,30 +18,36 @@ const HouseContextProvider = ({ children }) => {
 	const [properties, setProperties] = useState([]);
 	const [price, setPrice] = useState("Price range (any)");
 	const [loading, setLoading] = useState(false);
+	const [catId, setCatId] = useState("");
 
 	useEffect(() => {
 		const fetchHouses = async () => {
+			setLoading(true);
 			try {
-				const { data } = await publicRequest.get("/house/");
-				// console.log(data);
+				const { data } = await publicRequest.get(
+					catId ? `/house?category=${catId}` : `/house`
+				);
+				console.log(data);
 				setHouses(data);
 				setHouseData(data);
-			} catch (e) {
-				console.log(e);
+				setLoading(false);
+			} catch (err) {
+				setLoading(false);
+				console.log(err);
 			}
 		};
 		fetchHouses();
-	}, []);
+	}, [catId]);
 
 	useEffect(() => {
 		// return all countries
 		function getuniqueCountries() {
-			console.log(houses);
+			// console.log(houses);
 			const allCountries = houses.map((house) => {
 				return house.country;
 			});
-			console.log("hello world!");
-			console.log(allCountries);
+			// console.log("hello world!");
+			// console.log(allCountries);
 			// remove duplicates
 			const uniqueCountries = ["Location (any)", ...new Set(allCountries)];
 
@@ -149,6 +155,7 @@ const HouseContextProvider = ({ children }) => {
 				handleClick,
 				houses,
 				loading,
+				setCatId,
 			}}
 		>
 			{children}

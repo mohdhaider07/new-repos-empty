@@ -25,6 +25,7 @@ const HouseSchema = mongoose.Schema(
 		paymentPlan: { type: "String" },
 		gallery: { type: Array },
 		possesion: { type: Array },
+		category: [{ type: ObjectId, ref: "Category" }],
 		// agent:{type:"String"},
 	},
 	{ timestamps: true }

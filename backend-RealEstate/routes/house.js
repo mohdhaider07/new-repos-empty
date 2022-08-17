@@ -12,17 +12,29 @@ router.post("/", async (req, res) => {
 		console.log(e);
 	}
 });
-router.get("/", async (req, res) => {
-	// console.log(req.body);
 
+router.get("/", async (req, res) => {
+	const qNew = req.query.new;
+	const qCategory = req.query.category;
 	try {
-		const houses = await House.find();
-		res.status(200).send(houses);
-		// console.log(houses);
-	} catch (e) {
-		console.log(e);
+		let houses;
+		if (qNew) {
+			houses = await House.find().sort({ createdAt: -1 }).limit(10);
+		} else if (qCategory) {
+			houses = await House.find({
+				category: {
+					$in: [qCategory],
+				},
+			});
+		} else {
+			houses = await House.find();
+		}
+		res.status(200).json(houses);
+	} catch (err) {
+		res.status(500).json(err);
 	}
 });
+
 router.get("/:id", async (req, res) => {
 	// console.log(req.body);
 

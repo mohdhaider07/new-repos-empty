@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { HouseContext } from "./HouseContext";
 
-const Category = ({ item }) => {
-	const [slectedCat, setSelectedCat] = useState("");
-	console.log(slectedCat);
+const Category = ({ item, setSelectedCat, slectedCat, setCatId }) => {
+	// console.log(localStorage.getItem("catId"));
 	return (
 		<div
 			className={
@@ -10,7 +10,10 @@ const Category = ({ item }) => {
 					? "px-6 py-2  cursor-pointer border"
 					: "px-6 py-2  cursor-pointer border border-red-500"
 			}
-			onClick={() => setSelectedCat(item._id)}
+			onClick={() => {
+				setCatId(item._id);
+				setSelectedCat(item._id);
+			}}
 		>
 			{item.title}
 		</div>
