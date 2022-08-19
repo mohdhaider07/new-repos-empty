@@ -31,7 +31,18 @@ function CategoryDataGrid() {
 			headerName: "Title",
 			width: 200,
 			renderCell: (params) => {
-				return <div className="productListItem">{params.row.title}</div>;
+				return (
+					<div className="flex items-center">
+						{params.row.img && (
+							<img
+								className="h-8 w-8 mr-2 rounded-full"
+								src={params.row.img}
+								alt="img"
+							/>
+						)}
+						{params.row.title}
+					</div>
+				);
 			},
 		},
 		{

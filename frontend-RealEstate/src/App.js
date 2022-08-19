@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Admin from "./pages/Admin";
 import EditCategory from "./pages/EditCategory";
+import EditProperty from "./pages/EditProperty";
 
 // import pages
 import Home from "./pages/Home";
@@ -22,6 +23,7 @@ const App = () => {
 				<Route path="/newhouse" element={<NewHouse />} />
 				<Route path="/newcategory" element={<NewCategory />} />
 				<Route path="/category/:id" element={<EditCategory />} />
+				<Route path="/editproperty/:id" element={<EditProperty />} />
 				<Route path="/admin" element={<Admin />} />
 			</Routes>
 			<Footer />

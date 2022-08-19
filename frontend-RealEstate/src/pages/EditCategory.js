@@ -105,13 +105,16 @@ const EditCategory = () => {
 		}
 	};
 	const columns = [
-		{ field: "_id", headerName: "ID", width: 150 },
 		{
 			field: "title",
 			headerName: "Title",
 			width: 160,
 			renderCell: (params) => {
-				return <div className="productListItem">{params.row.name}</div>;
+				return (
+					<Link to={`/editproperty/${params.row._id}`}>
+						<div className="productListItem">{params.row.name}</div>
+					</Link>
+				);
 			},
 		},
 		{
@@ -119,7 +122,18 @@ const EditCategory = () => {
 			headerName: "Type",
 			width: 100,
 			renderCell: (params) => {
-				return <div className="productListItem">{params.row.type}</div>;
+				return (
+					<div className="flex items-center">
+						{params.row.image && (
+							<img
+								className="h-8 w-8 mr-2 rounded-full"
+								src={params.row.image}
+								alt="img"
+							/>
+						)}
+						{params.row.type}
+					</div>
+				);
 			},
 		},
 		{
@@ -153,10 +167,10 @@ const EditCategory = () => {
 	];
 
 	return (
-		<div className="min-h-screen">
+		<div className="min-h-screen flex space-x-4 bg-gray-50 justify-center  ">
 			<form
+				className="flex border h-fit mt-8  bg-white space-y-2 p-4 mb-4 flex-col max-w-[468px]"
 				onSubmit={handleSubmit}
-				className="flex border space-y-2 p-4 mb-4 flex-col mx-auto max-w-[468px]"
 			>
 				<input
 					onChange={(e) => setTitle(e.target.value)}
@@ -193,22 +207,29 @@ const EditCategory = () => {
 					{isLoading ? "Updateing..." : "Update"}
 				</button>
 			</form>
-			<div
-				className=" flex space-x-3 mx-4 lg:mx-6 xl:mx-16"
-				style={{ height: "400px" }}
-			>
-				<DataGrid
-					rows={nonCatHouses}
-					columns={columns}
-					getRowId={(row) => row._id}
-					rowsPerPageOptions={[5, 10, 15, 100]}
-				/>
-				<DataGrid
-					rows={catHouses}
-					columns={columns}
-					getRowId={(row) => row._id}
-					rowsPerPageOptions={[5, 10, 15, 100]}
-				/>
+			<div className=" flex flex-col space-y-3 mt-8  ">
+				<div
+					className="bg-white p-4"
+					style={{ height: "400px", width: "450px" }}
+				>
+					<DataGrid
+						rows={nonCatHouses}
+						columns={columns}
+						getRowId={(row) => row._id}
+						rowsPerPageOptions={[5, 10, 15, 100]}
+					/>
+				</div>
+				<div
+					className="bg-white p-4"
+					style={{ height: "400px", width: "450px" }}
+				>
+					<DataGrid
+						rows={catHouses}
+						columns={columns}
+						getRowId={(row) => row._id}
+						rowsPerPageOptions={[5, 10, 15, 100]}
+					/>
+				</div>
 			</div>
 		</div>
 	);

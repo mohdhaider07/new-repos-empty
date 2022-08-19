@@ -37,11 +37,13 @@ const ProperyDataGrid = () => {
 			renderCell: (params) => {
 				return (
 					<div style={{}} className="flex  items-center">
-						<img
-							className="h-8 w-8 mr-2 rounded-full"
-							src={params.row.image}
-							alt="img"
-						/>
+						{params.row.image && (
+							<img
+								className="h-8 w-8 mr-2 rounded-full"
+								src={params.row.image}
+								alt="img"
+							/>
+						)}
 						{params.row.name}
 					</div>
 				);
@@ -54,7 +56,7 @@ const ProperyDataGrid = () => {
 			renderCell: (params) => {
 				return (
 					<>
-						<Link to={"/category/" + params.row._id}>
+						<Link to={"/editproperty/" + params.row._id}>
 							<button className="p-2 hover:bg-gray-200 hover:text-red-400 rounded-full transition-all duration-500 cursor-pointer">
 								Edit
 							</button>

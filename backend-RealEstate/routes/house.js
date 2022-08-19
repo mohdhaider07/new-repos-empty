@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const House = require("../modals/House");
-
+const Category = require("../modals/Category");
 router.post("/", async (req, res) => {
 	// console.log(req.body);
 	const newHouse = new House(req.body);
@@ -53,6 +53,97 @@ router.delete("/:id", async (req, res) => {
 		res.status(200).send({ message: "deleted" });
 	} catch (e) {
 		console.log(e);
+	}
+});
+
+router.put("/:id", async (req, res) => {
+	try {
+		const house = await House.findByIdAndUpdate(req.params.id, req.body);
+
+		// console.log(category);
+		res.status(200).send(house);
+	} catch (e) {
+		console.log(e);
+	}
+});
+
+router.get("/noncat-house/:id", async (req, res) => {
+	// console.log(req.params.id);
+	try {
+		const house = await House.findById(req.params.id);
+		const categoryId = house.category;
+		const category = await Category.find({ _id: { $nin: categoryId } });
+		// console.log(houses);
+		res.status(200).json(category);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+router.get("/cat-house/:id", async (req, res) => {
+	// console.log(req.params.id);
+	try {
+		const house = await House.findById(req.params.id);
+		const categoryId = house.category;
+		const category = await Category.find({ _id: { $in: categoryId } });
+		// console.log(houses);
+		res.status(200).json(category);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
+router.post("/add", async (req, res) => {
+	// console.log("i am here =>", req.body);
+
+	const { categoryId, houseId } = req.body;
+
+	let house;
+	try {
+		house = await House.findByIdAndUpdate(houseId, {
+			$addToSet: { category: categoryId },
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+
+	try {
+		const category = await Category.findByIdAndUpdate(
+			categoryId,
+			{ $addToSet: { house: houseId } },
+			{ new: true }
+		);
+		res.status(200).json(house);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+router.post("/remove", async (req, res) => {
+	// console.log("i am here =>", req.body);
+	let house;
+	const { categoryId, houseId } = req.body;
+	try {
+		house = await House.findByIdAndUpdate(houseId, {
+			$pull: { category: categoryId },
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+
+	try {
+		const category = await Category.findByIdAndUpdate(
+			categoryId,
+			{ $pull: { house: houseId } },
+			{ new: true }
+		);
+		res.status(200).json(house);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
 	}
 });
 
