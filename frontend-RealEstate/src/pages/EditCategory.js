@@ -3,11 +3,17 @@ import { Link } from "react-router-dom";
 import { publicRequest } from "../requestMethods";
 import { useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
+// firebase function to upload Image
+import { handleFile } from "../functions/firebase";
+// fire base function to delete image
+import { handleDelete } from "../functions/firebase";
+
 const EditCategory = () => {
 	const [nonCatHouses, setNonCatHouses] = useState([]);
 	const [category, setCategory] = useState([]);
 	const [catHouses, setCatHouses] = useState([]);
 	const [title, setTitle] = useState("");
+	const [img, setImg] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const { id } = useParams();
 
@@ -22,6 +28,7 @@ const EditCategory = () => {
 			const { data } = await publicRequest.get(`/category/${id}`);
 			setCategory(data);
 			setTitle(data.title);
+			setImg(data.img);
 		} catch (e) {
 			console.log(e);
 		}
@@ -56,7 +63,10 @@ const EditCategory = () => {
 		console.log(id);
 		setIsLoading(true);
 		try {
-			const { data } = await publicRequest.put(`/category/${id}`, { title });
+			const { data } = await publicRequest.put(`/category/${id}`, {
+				title,
+				img,
+			});
 			setIsLoading(false);
 		} catch (e) {
 			setIsLoading(false);
@@ -156,6 +166,26 @@ const EditCategory = () => {
 					name="title"
 					placeholder="Category title"
 				/>
+				<input
+					onChange={(e) => {
+						handleFile(e.target.files[0], setImg, false);
+					}}
+					className="focus:outline-none border input_box"
+					type="file"
+					name="image"
+					placeholder="Category Image"
+				/>
+				{img && (
+					<div className="relative flex  w-fit">
+						<img className="h-20  object-cover" src={img} alt="img" />
+						<span
+							onClick={() => handleDelete(img, setImg, false)}
+							className="absolute cursor-pointer text-red-600 flex -top-2 right-0 rounded-full p-1 pr-0 font-bold bg-white bg-opacity-60 "
+						>
+							X
+						</span>
+					</div>
+				)}
 				<button
 					disabled={isLoading}
 					className="bg-red-500 mt-3 hover:bg-red-800 text-white px-4 py-3 rounded-lg transition"

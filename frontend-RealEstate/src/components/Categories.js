@@ -11,11 +11,12 @@ const fetchCategories = async () => {
 
 const Categories = () => {
 	const [slectedCat, setSelectedCat] = useState("All");
-	const { setCatId } = useContext(HouseContext);
+	const { setCatId, bannerImg, setBannerImg } = useContext(HouseContext);
 	const { data, error, isError, isLoading } = useQuery(
 		"categories",
 		fetchCategories
 	);
+
 	return (
 		<div className=" px-[30px]  max-w-[1170px] mx-auto flex justify-center flex-wrap ">
 			<div
@@ -25,6 +26,7 @@ const Categories = () => {
 						: "px-6 py-2  cursor-pointer bg-red-500  text-white "
 				}
 				onClick={() => {
+					setBannerImg("");
 					setCatId("");
 					setSelectedCat("All");
 				}}
@@ -37,6 +39,7 @@ const Categories = () => {
 						slectedCat={slectedCat}
 						setSelectedCat={setSelectedCat}
 						setCatId={setCatId}
+						setBannerImg={setBannerImg}
 						key={item._id}
 						item={item}
 					/>

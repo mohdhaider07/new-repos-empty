@@ -62,7 +62,7 @@ router.get("/noncat-house/:id", async (req, res) => {
 		const category = await Category.findById(req.params.id);
 		const housesId = category.house;
 		const houses = await House.find({ _id: { $nin: housesId } });
-		console.log(houses);
+		// console.log(houses);
 		res.status(200).json(houses);
 	} catch (err) {
 		console.log(err);
@@ -75,7 +75,7 @@ router.get("/cat-house/:id", async (req, res) => {
 		const category = await Category.findById(req.params.id);
 		const housesId = category.house;
 		const houses = await House.find({ _id: { $in: housesId } });
-		console.log(houses);
+		// console.log(houses);
 		res.status(200).json(houses);
 	} catch (err) {
 		console.log(err);

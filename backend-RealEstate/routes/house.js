@@ -47,4 +47,13 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+router.delete("/:id", async (req, res) => {
+	try {
+		await House.findByIdAndDelete(req.params.id);
+		res.status(200).send({ message: "deleted" });
+	} catch (e) {
+		console.log(e);
+	}
+});
+
 module.exports = router;

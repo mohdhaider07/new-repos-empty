@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { HouseContext } from "./HouseContext";
 
 import Image from "../assets/img/house-banner.png";
 import Search from "../components/Search";
 import Categories from "./Categories";
 
 const Banner = () => {
+	const { bannerImg } = useContext(HouseContext);
 	return (
 		<section className="h-full max-h-[640px] mb-8 xl:mb-24">
 			<div className="flex flex-col lg:flex-row">
@@ -18,7 +20,7 @@ const Banner = () => {
 					</p>
 				</div>
 				<div className="hidden flex-1 lg:flex justify-end items-end">
-					<img src={Image} alt="" />
+					<img src={bannerImg || Image} alt="banner img" />
 				</div>
 			</div>
 			<Search />

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { HouseContext } from "./HouseContext";
 
-const Category = ({ item, setSelectedCat, slectedCat, setCatId }) => {
+const Category = ({
+	item,
+	setSelectedCat,
+	slectedCat,
+	setCatId,
+	setBannerImg,
+}) => {
 	// console.log(localStorage.getItem("catId"));
 	return (
 		<div
@@ -12,6 +18,7 @@ const Category = ({ item, setSelectedCat, slectedCat, setCatId }) => {
 			}
 			onClick={() => {
 				setCatId(item._id);
+				setBannerImg(item.img);
 				setSelectedCat(item._id);
 			}}
 		>

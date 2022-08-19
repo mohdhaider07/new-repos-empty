@@ -12,6 +12,7 @@ const Header = () => {
 				<Link to="/">
 					<img style={{ maxWidth: "100px" }} src={Logo} alt="" />
 				</Link>
+
 				<div className="flex items-center gap-6">
 					<Link className="hover:text-red-600 transition" to="/">
 						Log in

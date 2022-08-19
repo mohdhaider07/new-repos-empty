@@ -19,6 +19,7 @@ const HouseContextProvider = ({ children }) => {
 	const [price, setPrice] = useState("Price range (any)");
 	const [loading, setLoading] = useState(false);
 	const [catId, setCatId] = useState("");
+	const [bannerImg, setBannerImg] = useState("");
 
 	useEffect(() => {
 		const fetchHouses = async () => {
@@ -36,6 +37,7 @@ const HouseContextProvider = ({ children }) => {
 				console.log(err);
 			}
 		};
+
 		fetchHouses();
 	}, [catId]);
 
@@ -156,6 +158,8 @@ const HouseContextProvider = ({ children }) => {
 				houses,
 				loading,
 				setCatId,
+				bannerImg,
+				setBannerImg,
 			}}
 		>
 			{children}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // components
 import SideBar from "../components/SideBar";
-import ProductDataGrid from "../components/ProductDataGrid";
+import ProperyDataGrid from "../components/ProperyDataGrid";
 import CategoryDataGrid from "../components/CategoryDataGrid";
 const Admin = () => {
 	const [selectedTab, setSelectedTab] = useState("Categories");
@@ -33,9 +33,9 @@ const Admin = () => {
 						<CategoryDataGrid />
 					</div>
 				)}
-				{selectedTab === "Products" && (
+				{selectedTab === "Houses" && (
 					<div className="w-[80%]">
-						<ProductDataGrid />
+						<ProperyDataGrid />
 					</div>
 				)}
 			</div>
